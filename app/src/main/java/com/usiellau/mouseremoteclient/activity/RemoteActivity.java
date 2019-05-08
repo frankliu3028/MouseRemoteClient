@@ -1,16 +1,15 @@
-package com.usiellau.mouseremoteclient;
+package com.usiellau.mouseremoteclient.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
+import com.usiellau.mouseremoteclient.R;
+import com.usiellau.mouseremoteclient.Sender;
 
 public class RemoteActivity extends AppCompatActivity {
     private String TAG = "RemoteActivity";
