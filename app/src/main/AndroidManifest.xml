@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".activity.RemoteActivity"/>
         <activity android:name=".activity.ControlActivity"/>
+        <service android:name=".service.MouseControlService"/>
     </application>
 
 </manifest>

@@ -1,8 +1,9 @@
 package com.usiellau.mouseremoteclient.utils;
 
+import android.util.Log;
+
 import io.netty.channel.ChannelHandlerContext;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -19,7 +20,7 @@ public class Util {
 	
 	public static int byteArrayToInt(byte[] b) {
 		if(b.length != 4) {
-			Log.log(TAG, LogLevel.ERROR, "byte array turn to INT length must be 4");
+			Log.e(TAG, "byte array turn to INT length must be 4");
 			return -1;
 		}
         int intValue = 0;
@@ -116,36 +117,6 @@ public class Util {
 		}
 		return null;
 	}
-    
-    public static File selectDirectory(String dialogTitle) {
-    	JFileChooser chooser = new JFileChooser();
-    	if(dialogTitle != null) {
-    		chooser.setDialogTitle(dialogTitle);
-    	}
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	    int returnVal = chooser.showOpenDialog(null);
-	    if(returnVal == JFileChooser.APPROVE_OPTION) {
-	    	Log.log(TAG, LogLevel.INFO, "You chose to open this file: " +
-	            chooser.getSelectedFile().getAbsolutePath());
-	    }
-	    
-	    File file = chooser.getSelectedFile();
-	    return file;
-    }
-    
-    public static File selectFile(String dialogTitle) {
-    	JFileChooser chooser = new JFileChooser();
-    	if(dialogTitle != null) {
-    		chooser.setDialogTitle(dialogTitle);
-    	}
-	    int returnVal = chooser.showOpenDialog(null);
-	    if(returnVal == JFileChooser.APPROVE_OPTION) {
-	    	Log.log(TAG, LogLevel.INFO, "You chose to open this file: " +
-		            chooser.getSelectedFile().getAbsolutePath());
-	    }
-		File file = chooser.getSelectedFile();
-		return file;
-    }
 
 	public static double formatDouble(double price) {
 		BigDecimal b3 = new BigDecimal(price);

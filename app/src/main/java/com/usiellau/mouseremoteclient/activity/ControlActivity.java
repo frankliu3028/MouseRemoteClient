@@ -1,67 +1,95 @@
 package com.usiellau.mouseremoteclient.activity;
 
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.usiellau.mouseremoteclient.R;
+import com.usiellau.mouseremoteclient.fragment.ClickModeFragment;
+import com.usiellau.mouseremoteclient.fragment.SensorModeFragment;
+import com.usiellau.mouseremoteclient.fragment.TouchModeFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ControlActivity extends AppCompatActivity {
     private final String TAG = ControlActivity.class.getSimpleName();
 
-    @BindView(R.id.btn_up)
-    Button btnUp;
-    @BindView(R.id.btn_left)
-    Button btnLeft;
-    @BindView(R.id.btn_right)
-    Button btnRight;
-    @BindView(R.id.btn_down)
-    Button btnDown;
-    @BindView(R.id.btn_left_click)
-    Button btnLeftClick;
-    @BindView(R.id.btn_right_click)
-    Button btnRightClick;
+    @BindView(R.id.fragment_container)
+    FrameLayout fragmentContainer;
+
+    private ClickModeFragment clickModeFragment;
+    private TouchModeFragment touchModeFragment;
+    private SensorModeFragment sensorModeFragment;
+
+    private Fragment currentSelectFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control);
         ButterKnife.bind(this);
-    }
-
-    @OnClick(R.id.btn_up)
-    void onClickBtnUp(){
 
     }
 
-    @OnClick(R.id.btn_left)
-    void onClickBtnLeft(){
-
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 
-    @OnClick(R.id.btn_right)
-    void onClickBtnRight(){
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_control, menu);
+        return true;
     }
 
-    @OnClick(R.id.btn_down)
-    void onClickBtnDown(){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_mode_click:
+                if(currentSelectFragment instanceof ClickModeFragment){
+                    break;
+                }
+                if(clickModeFragment == null){
+                    clickModeFragment = new ClickModeFragment();
+                }
+                replaceFragment(clickModeFragment);
+                currentSelectFragment = clickModeFragment;
+                break;
+            case R.id.action_mode_touch:
+                if(currentSelectFragment instanceof TouchModeFragment){
+                    break;
+                }
+                if(touchModeFragment == null){
+                    touchModeFragment = new TouchModeFragment();
+                }
+                replaceFragment(touchModeFragment);
+                currentSelectFragment = touchModeFragment;
 
-    }
+                break;
+            case R.id.action_mode_sensor:
+                if(currentSelectFragment instanceof SensorModeFragment){
+                    break;
+                }
+                if(sensorModeFragment == null){
+                    sensorModeFragment = new SensorModeFragment();
+                }
+                replaceFragment(sensorModeFragment);
+                currentSelectFragment = sensorModeFragment;
 
-    @OnClick(R.id.btn_left_click)
-    void onClickBtnLeftClick(){
-
-    }
-
-    @OnClick(R.id.btn_right_click)
-    void onClickBtnRightClick(){
-
+                break;
+                default:
+                    break;
+        }
+        return true;
     }
 }
