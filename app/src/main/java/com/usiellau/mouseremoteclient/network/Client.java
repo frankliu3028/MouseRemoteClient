@@ -2,7 +2,6 @@ package com.usiellau.mouseremoteclient.network;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -17,10 +16,12 @@ public class Client {
     private final int port;
 
     private ClientHandler clientHandler;
+    private ClientCallback callback;
 
-    public Client(String remoteIp, int port){
+    public Client(String remoteIp, int port, ClientCallback callback){
         this.remoteIp = remoteIp;
         this.port = port;
+        this.callback = callback;
     }
 
     public void start(){
@@ -34,7 +35,7 @@ public class Client {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            clientHandler = new ClientHandler();
+                            clientHandler = new ClientHandler(callback);
                             ch.pipeline().addLast(new ProtocolEncoder(), new ProtocolDecoder(), clientHandler);
                         }
                     });
@@ -44,6 +45,26 @@ public class Client {
             e.printStackTrace();
             worker.shutdownGracefully();
         }
+    }
+
+    public void mouseMoveTo(int x, int y){
+        clientHandler.mouseMoveTo(x, y);
+    }
+
+    public void mouseMoveRelativeTo(int x, int y){
+        clientHandler.mouseMoveRelativeTo(x, y);
+    }
+
+    public void mousePressDown(int button){
+        clientHandler.mousePressDown(button);
+    }
+
+    public void mousePressUp(int button){
+        clientHandler.mousePressUp(button);
+    }
+
+    public void close(){
+        clientHandler.close();
     }
 
 }

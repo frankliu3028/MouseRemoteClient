@@ -7,7 +7,17 @@ import java.nio.ByteBuffer;
 
 public class ProtocolFactory {
 
-    public static BasicProtocol createMoveRelative(int x, int y){
+    public static BasicProtocol createMouseMoveTo(int x, int y){
+        BasicProtocol basicProtocol = new BasicProtocol();
+        basicProtocol.setMsgId(MsgId.MOVE_TO);
+        ByteBuffer buffer = ByteBuffer.allocate(8);
+        buffer.putInt(x);
+        buffer.putInt(y);
+        basicProtocol.setDataArray(buffer.array());
+        return basicProtocol;
+    }
+
+    public static BasicProtocol createMouseMoveRelativeTo(int x, int y){
         BasicProtocol basicProtocol = new BasicProtocol();
         basicProtocol.setMsgId(MsgId.MOVE_RELATIVE);
         ByteBuffer buffer = ByteBuffer.allocate(8);

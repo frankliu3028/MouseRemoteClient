@@ -8,7 +8,7 @@ public class ParserTest {
 
     @Test
     public void parseMoveRelative() {
-        BasicProtocol basicProtocol = ProtocolFactory.createMoveRelative(100, 200);
-        Parser.parseMoveRelative(basicProtocol);
+        BasicProtocol basicProtocol = ProtocolFactory.createMouseMoveRelativeTo(100, 200);
+        Parser.parseMouseMoveRelativeTo(basicProtocol);
     }
 }

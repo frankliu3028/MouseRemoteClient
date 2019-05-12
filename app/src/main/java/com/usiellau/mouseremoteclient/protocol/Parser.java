@@ -8,7 +8,14 @@ public class Parser {
 
     private static final String TAG = Parser.class.getSimpleName();
 
-    public static void parseMoveRelative(BasicProtocol basicProtocol){
+    public static void parseMouseMoveTo(BasicProtocol basicProtocol){
+        byte[] data = basicProtocol.getDataArray();
+        int x = Util.bytes2Int(data, 0);
+        int y = Util.bytes2Int(data, 4);
+        System.out.println("x:" + x + " y:" + y);
+    }
+
+    public static void parseMouseMoveRelativeTo(BasicProtocol basicProtocol){
         byte[] data = basicProtocol.getDataArray();
         int x = Util.bytes2Int(data, 0);
         int y = Util.bytes2Int(data, 4);
