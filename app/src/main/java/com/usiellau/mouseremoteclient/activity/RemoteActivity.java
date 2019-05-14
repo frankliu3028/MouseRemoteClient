@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.usiellau.mouseremoteclient.R;
-import com.usiellau.mouseremoteclient.Sender;
 
 public class RemoteActivity extends AppCompatActivity {
     private String TAG = "RemoteActivity";
