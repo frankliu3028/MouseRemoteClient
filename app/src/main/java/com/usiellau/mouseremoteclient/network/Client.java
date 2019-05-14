@@ -63,6 +63,10 @@ public class Client {
         clientHandler.mousePressUp(button);
     }
 
+    public void mouseClick(int button){
+        clientHandler.mouseClick(button);
+    }
+
     public void close(){
         clientHandler.close();
     }

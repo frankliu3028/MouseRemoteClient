@@ -4,14 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".activity.MainActivity">
 
-
-    <Button
-        android:id="@+id/btn_scan"
+    <EditText
+        android:id="@+id/et_server_ip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Scan"
-        android:layout_margin="10dp" />
+        android:inputType="text"
+        android:hint="server ip"/>
+    <EditText
+        android:id="@+id/et_server_port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="server_port"/>
+
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect" />
 
 </LinearLayout>

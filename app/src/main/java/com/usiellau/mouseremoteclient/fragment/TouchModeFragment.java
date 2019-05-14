@@ -19,7 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.usiellau.mouseremoteclient.R;
+import com.usiellau.mouseremoteclient.protocol.Parser;
 import com.usiellau.mouseremoteclient.service.MouseControlService;
+import com.usiellau.mouseremoteclient.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +32,7 @@ public class TouchModeFragment extends Fragment {
     @BindView(R.id.touch_area)
     LinearLayout touchArea;
 
-    int xRecord = 0, yRecord = 0;
+    int xStart = 0, yStart = 0, xRecord = 0, yRecord = 0, xMove = 0, yMove = 0;
     long time;
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
@@ -39,21 +41,24 @@ public class TouchModeFragment extends Fragment {
             {
                 case MotionEvent.ACTION_DOWN:
                     time = System.currentTimeMillis();
+                    xStart = (int)event.getX();
+                    yStart = (int)event.getY();
+                    xRecord = xStart;
+                    yRecord = yStart;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    xMove = (int)event.getX() - xRecord;
+                    yMove = (int)event.getY() - yRecord;
+                    mouseControlBinder.mouseMoveRelativeTo(xMove, yMove);
                     xRecord = (int)event.getX();
                     yRecord = (int)event.getY();
                     break;
-                case MotionEvent.ACTION_MOVE:
-                    int x1 = (int)event.getX() - xRecord;
-                    int y1 = (int)event.getY() - yRecord;
-                    mouseControlBinder.mouseMoveRelativeTo(x1, y1);
-                    break;
                 case MotionEvent.ACTION_UP:
                     long currTime = System.currentTimeMillis();
-                    if(currTime - time < 200)sendClickCmd();
-                    int x2 = (int)event.getX() - xRecord;
-                    int y2 = (int)event.getY() - yRecord;
+                    if(currTime - time < 200) {
+                        mouseControlBinder.mouseClick(Constant.BUTTON_LEFT);
+                    }
                     break;
-
                 default:
                     break;
             }

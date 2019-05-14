@@ -45,6 +45,10 @@ public class MouseControlService extends Service {
             client.mousePressUp(button);
         }
 
+        public void mouseClick(int button){
+            client.mouseClick(button);
+        }
+
     }
 
 

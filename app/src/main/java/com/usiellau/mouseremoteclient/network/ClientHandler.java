@@ -47,6 +47,11 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         ctx.writeAndFlush(basicProtocol);
     }
 
+    public void mouseClick(int button){
+        BasicProtocol basicProtocol = ProtocolFactory.createMouseClick(button);
+        ctx.writeAndFlush(basicProtocol);
+    }
+
     public void close(){
         ctx.close();
     }

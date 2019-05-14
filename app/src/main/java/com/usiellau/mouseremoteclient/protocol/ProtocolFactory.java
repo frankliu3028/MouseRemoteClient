@@ -47,4 +47,14 @@ public class ProtocolFactory {
         return basicProtocol;
     }
 
+    public static BasicProtocol createMouseClick(int button){
+        if(button != Constant.BUTTON_LEFT && button != Constant.BUTTON_RIGHT){
+            return null;
+        }
+        BasicProtocol basicProtocol = new BasicProtocol();
+        basicProtocol.setMsgId(MsgId.MOUSE_CLICK);
+        basicProtocol.setDataArray(Util.int2ByteArrays(button));
+        return basicProtocol;
+    }
+
 }

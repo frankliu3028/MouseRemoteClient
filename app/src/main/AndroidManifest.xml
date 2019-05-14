@@ -18,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RemoteActivity"/>
         <activity android:name=".activity.ControlActivity"/>
         <service android:name=".service.MouseControlService"/>
     </application>
