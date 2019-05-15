@@ -63,6 +63,7 @@ public class ControlActivity extends AppCompatActivity {
                     clickModeFragment = new ClickModeFragment();
                 }
                 replaceFragment(clickModeFragment);
+                getSupportActionBar().setTitle("ClickMode");
                 currentSelectFragment = clickModeFragment;
                 break;
             case R.id.action_mode_touch:
@@ -73,6 +74,7 @@ public class ControlActivity extends AppCompatActivity {
                     touchModeFragment = new TouchModeFragment();
                 }
                 replaceFragment(touchModeFragment);
+                getSupportActionBar().setTitle("TouchMode");
                 currentSelectFragment = touchModeFragment;
 
                 break;
@@ -84,6 +86,7 @@ public class ControlActivity extends AppCompatActivity {
                     sensorModeFragment = new SensorModeFragment();
                 }
                 replaceFragment(sensorModeFragment);
+                getSupportActionBar().setTitle("SensorMode");
                 currentSelectFragment = sensorModeFragment;
 
                 break;
