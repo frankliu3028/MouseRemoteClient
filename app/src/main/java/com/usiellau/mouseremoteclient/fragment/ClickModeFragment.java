@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.usiellau.mouseremoteclient.R;
 import com.usiellau.mouseremoteclient.service.MouseControlService;
+import com.usiellau.mouseremoteclient.utils.Constant;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,8 +58,8 @@ public class ClickModeFragment extends Fragment {
         }
     };
 
-    private final int period = 200;
-    private final int unitDistance = 1;
+    private final int period = 30;
+    private final int unitDistance = 4;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,39 +76,18 @@ public class ClickModeFragment extends Fragment {
         return rootView;
     }
 
-    private TimerTask timerTaskUp = new TimerTask() {
-        @Override
-        public void run() {
-            mouseControlBinder.mouseMoveRelativeTo(0, -unitDistance);
-        }
-    };
-
-    private TimerTask timerTaskDown = new TimerTask() {
-        @Override
-        public void run() {
-            mouseControlBinder.mouseMoveRelativeTo(0, unitDistance);
-        }
-    };
-
-    private TimerTask timerTaskLeft = new TimerTask() {
-        @Override
-        public void run() {
-            mouseControlBinder.mouseMoveRelativeTo(-unitDistance, 0);
-        }
-    };
-
-    private TimerTask timerTaskRight = new TimerTask() {
-        @Override
-        public void run() {
-            mouseControlBinder.mouseMoveRelativeTo(unitDistance, 0);
-        }
-    };
-
+    private TimerTask timerTaskUp, timerTaskDown, timerTaskLeft, timerTaskRight;
 
     @OnTouch(R.id.btn_up)
     boolean onTouchBtnUp(View view, MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                timerTaskUp = new TimerTask() {
+                    @Override
+                    public void run() {
+                        mouseControlBinder.mouseMoveRelativeTo(0, -unitDistance);
+                    }
+                };
                 timer.schedule(timerTaskUp, 0, period);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -115,6 +95,7 @@ public class ClickModeFragment extends Fragment {
                 break;
             case MotionEvent.ACTION_UP:
                 timerTaskUp.cancel();
+                timer.purge();
                 break;
                 default:
                     break;
@@ -126,6 +107,12 @@ public class ClickModeFragment extends Fragment {
     boolean onTouchBtnDown(View view, MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                timerTaskDown = new TimerTask() {
+                    @Override
+                    public void run() {
+                        mouseControlBinder.mouseMoveRelativeTo(0, unitDistance);
+                    }
+                };
                 timer.schedule(timerTaskDown, 0, period);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -133,6 +120,7 @@ public class ClickModeFragment extends Fragment {
                 break;
             case MotionEvent.ACTION_UP:
                 timerTaskDown.cancel();
+                timer.purge();
                 break;
             default:
                 break;
@@ -144,6 +132,12 @@ public class ClickModeFragment extends Fragment {
     boolean onTouchBtnLeft(View view, MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                timerTaskLeft = new TimerTask() {
+                    @Override
+                    public void run() {
+                        mouseControlBinder.mouseMoveRelativeTo(-unitDistance, 0);
+                    }
+                };
                 timer.schedule(timerTaskLeft, 0, period);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -151,6 +145,7 @@ public class ClickModeFragment extends Fragment {
                 break;
             case MotionEvent.ACTION_UP:
                 timerTaskLeft.cancel();
+                timer.purge();
                 break;
             default:
                 break;
@@ -162,6 +157,12 @@ public class ClickModeFragment extends Fragment {
     boolean onTouchBtnRight(View view, MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                timerTaskRight = new TimerTask() {
+                    @Override
+                    public void run() {
+                        mouseControlBinder.mouseMoveRelativeTo(unitDistance, 0);
+                    }
+                };
                 timer.schedule(timerTaskRight, 0, period);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -169,6 +170,7 @@ public class ClickModeFragment extends Fragment {
                 break;
             case MotionEvent.ACTION_UP:
                 timerTaskRight.cancel();
+                timer.purge();
                 break;
             default:
                 break;
@@ -180,13 +182,13 @@ public class ClickModeFragment extends Fragment {
     boolean onTouchBtnLeftClick(View view, MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-
+                mouseControlBinder.mousePressDown(Constant.BUTTON_LEFT);
                 break;
             case MotionEvent.ACTION_MOVE:
 
                 break;
             case MotionEvent.ACTION_UP:
-
+                mouseControlBinder.mousePressUp(Constant.BUTTON_LEFT);
                 break;
             default:
                 break;
@@ -198,13 +200,13 @@ public class ClickModeFragment extends Fragment {
     boolean onTouchBtnRightClick(View view, MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-
+                mouseControlBinder.mousePressDown(Constant.BUTTON_RIGHT);
                 break;
             case MotionEvent.ACTION_MOVE:
 
                 break;
             case MotionEvent.ACTION_UP:
-
+                mouseControlBinder.mousePressUp(Constant.BUTTON_RIGHT);
                 break;
             default:
                 break;
