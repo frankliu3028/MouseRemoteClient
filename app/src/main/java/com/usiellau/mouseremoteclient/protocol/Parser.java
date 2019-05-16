@@ -1,5 +1,6 @@
 package com.usiellau.mouseremoteclient.protocol;
 
+import com.usiellau.mouseremoteclient.entity.ScreenSize;
 import com.usiellau.mouseremoteclient.utils.Util;
 
 import java.util.Arrays;
@@ -30,5 +31,12 @@ public class Parser {
     public static int parsePressUp(BasicProtocol basicProtocol){
         int button = Util.byteArrayToInt(basicProtocol.getDataArray());
         return button;
+    }
+
+    public static ScreenSize parseScreenSizeResponse(BasicProtocol basicProtocol){
+        byte[] data = basicProtocol.getDataArray();
+        int width = Util.bytes2Int(data, 0);
+        int height = Util.bytes2Int(data, 4);
+        return new ScreenSize(width, height);
     }
 }

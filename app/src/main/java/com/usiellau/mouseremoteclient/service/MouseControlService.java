@@ -7,6 +7,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
+import com.usiellau.mouseremoteclient.entity.ScreenSize;
 import com.usiellau.mouseremoteclient.network.Client;
 import com.usiellau.mouseremoteclient.network.ClientCallback;
 import com.usiellau.mouseremoteclient.protocol.BasicProtocol;
@@ -47,6 +48,10 @@ public class MouseControlService extends Service {
 
         public void mouseClick(int button){
             client.mouseClick(button);
+        }
+
+        public ScreenSize getScreenSize(){
+            return client.getScreenSize();
         }
 
     }

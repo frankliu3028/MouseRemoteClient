@@ -1,5 +1,7 @@
 package com.usiellau.mouseremoteclient.network;
 
+import com.usiellau.mouseremoteclient.entity.ScreenSize;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -65,6 +67,10 @@ public class Client {
 
     public void mouseClick(int button){
         clientHandler.mouseClick(button);
+    }
+
+    public ScreenSize getScreenSize(){
+        return clientHandler.getScreenSize();
     }
 
     public void close(){

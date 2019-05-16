@@ -57,4 +57,10 @@ public class ProtocolFactory {
         return basicProtocol;
     }
 
+    public static BasicProtocol createScreenSizeRequest(){
+        BasicProtocol basicProtocol = new BasicProtocol();
+        basicProtocol.setMsgId(MsgId.SCREEN_SIZE_REQUEST);
+        return basicProtocol;
+    }
+
 }
