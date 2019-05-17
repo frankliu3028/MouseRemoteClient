@@ -45,6 +45,9 @@ public class SensorModeFragment extends Fragment {
 
     private boolean isCalibration = false;
 
+    private final int maxZOffset = 45;
+    private final int maxXOffset = 45;
+
     private int currentZAngle = 0;
     private int currentXAngle = 0;
     private int calibrationZ = 0;
@@ -116,15 +119,20 @@ public class SensorModeFragment extends Fragment {
 
     private int calculateCoordinateX(){
         int curZ = currentZAngle;
-        if(curZ < calibrationZ){
-            curZ += 360;
+        if(curZ > calibrationZ){
+            curZ -= 360;
         }
-        int x = (int)(screenSize.getWidth() / 2 + calibrationDistance * Math.tan(curZ - calibrationZ));
+        int currZOffset = curZ - calibrationZ;
+
+        int x = screenSize.getWidth() / (maxZOffset * 2) * currZOffset + screenSize.getWidth() / 2;
+        if(x < 0) x = 0;
+        if(x > screenSize.getWidth()) x = screenSize.getWidth();
         return x;
     }
 
     private int calculateCoordinateY(){
-         int y = (int)(screenSize.getHeight() / 2 + calibrationDistance * Math.tan(-calibrationX) - calibrationDistance * Math.tan(-currentXAngle));
-         return y;
+        int currXOffset = currentXAngle - calibrationX;
+        int y = screenSize.getHeight() / (maxXOffset * 2) * currXOffset + screenSize.getHeight() / 2;
+        return y;
     }
 }
