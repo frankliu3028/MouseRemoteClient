@@ -214,4 +214,10 @@ public class ClickModeFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unbindService(serviceConnection);
+    }
+
 }

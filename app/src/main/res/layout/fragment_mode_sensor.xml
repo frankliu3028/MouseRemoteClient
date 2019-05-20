@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
-    <Button
-        android:id="@+id/btn_calibration"
-        android:layout_width="match_parent"
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_xz"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="校准"/>
+        android:text="XZ模式"/>
 
     <TextView
         android:id="@+id/tv_z"
@@ -27,5 +28,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="y:"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="calibration:"/>
+        <TextView
+            android:id="@+id/tv_calibration_z"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="calibrationZ"/>
+        <TextView
+            android:id="@+id/tv_calibration_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="calibrationX"/>
+        <TextView
+            android:id="@+id/tv_calibration_y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="calibrationY"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_calibration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="校准"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_left_click"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="left_click"/>
+        <Button
+            android:id="@+id/btn_right_click"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="right_click"/>
+    </LinearLayout>
+
 
 </LinearLayout>

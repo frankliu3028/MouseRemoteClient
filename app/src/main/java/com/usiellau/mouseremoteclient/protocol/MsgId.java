@@ -8,4 +8,6 @@ public class MsgId {
     public static final byte MOUSE_CLICK = 4;
     public static final byte SCREEN_SIZE_REQUEST = 5;
     public static final byte SCREEN_SIZE_RESPONSE = 6;
+    public static final byte SERVICE_DISCOVER_REQUEST = 7;
+    public static final byte SERVICE_DISCOVER_RESPONSE = 8;
 }

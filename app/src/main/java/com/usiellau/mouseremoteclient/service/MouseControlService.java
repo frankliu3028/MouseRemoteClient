@@ -1,5 +1,6 @@
 package com.usiellau.mouseremoteclient.service;
 
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -25,6 +26,16 @@ public class MouseControlService extends Service {
     private ClientCallback clientCallback = new ClientCallback() {
         @Override
         public void receivePacket(BasicProtocol basicProtocol) {
+
+        }
+
+        @Override
+        public void connectSuccess() {
+
+        }
+
+        @Override
+        public void connectFailure() {
 
         }
     };
@@ -78,10 +89,14 @@ public class MouseControlService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        serverIp = intent.getStringExtra("serverIp");
-        serverPort = intent.getIntExtra("serverPort", -1);
+        if(intent != null){
+            serverIp = intent.getStringExtra("serverIp");
+            serverPort = intent.getIntExtra("serverPort", -1);
+        }
         return super.onStartCommand(intent, flags, startId);
     }
+
+
 
     @Override
     public void onDestroy() {

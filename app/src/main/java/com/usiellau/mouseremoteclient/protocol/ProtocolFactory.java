@@ -63,4 +63,10 @@ public class ProtocolFactory {
         return basicProtocol;
     }
 
+    public static BasicProtocol createServiceDiscoverRequest(){
+        BasicProtocol res = new BasicProtocol();
+        res.setMsgId(MsgId.SERVICE_DISCOVER_REQUEST);
+        return res;
+    }
+
 }

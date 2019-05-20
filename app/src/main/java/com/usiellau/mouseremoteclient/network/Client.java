@@ -2,6 +2,8 @@ package com.usiellau.mouseremoteclient.network;
 
 import com.usiellau.mouseremoteclient.entity.ScreenSize;
 
+import java.net.ConnectException;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -42,8 +44,9 @@ public class Client {
                         }
                     });
             ChannelFuture f = b.connect(remoteIp, port).sync();
+            callback.connectSuccess();
             f.channel().closeFuture().sync();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e){
             e.printStackTrace();
             worker.shutdownGracefully();
         }

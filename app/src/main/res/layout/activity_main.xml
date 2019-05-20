@@ -8,23 +8,10 @@
     android:padding="10dp"
     tools:context=".activity.MainActivity">
 
-    <EditText
-        android:id="@+id/et_server_ip"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_device"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="server ip"/>
-    <EditText
-        android:id="@+id/et_server_port"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="server_port"/>
+        android:layout_height="match_parent"/>
 
-    <Button
-        android:id="@+id/btn_connect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Connect" />
 
 </LinearLayout>
